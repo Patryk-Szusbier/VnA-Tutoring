@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* 1. Definicja własnych kolorów */
+@theme {
+  --color-dark: #080808;
+  --color-grayish: #434343;
+  --color-accent: #ff9a00;
+  --color-text: #888888;
+  --color-text2: #ffffff;
+}
+html,
+body,
+#root {
+  @apply m-0 p-0 w-full h-full bg-[#080808];
+}
