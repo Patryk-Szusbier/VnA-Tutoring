@@ -1,22 +1,48 @@
 // src/components/AboutMe/AboutMe.jsx
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "motion/react";
 import MyPhoto from "../../assets/108.jpg";
+
 export default function AboutMe() {
+  // referencja do sekcji
+  const ref = useRef(null);
+  // flaga widoczności
+  const inView = useInView(ref, { margin: "-20% 0px", amount: 0.3 });
+
   return (
-    <section id="omnie" className="w-4/5 mx-auto py-20">
-      <div className="flex flex-col md:flex-row items-center gap-8">
-        {/* Lewa kolumna: zdjęcie */}
-        <div className="flex-shrink-0">
+    <section
+      ref={ref}
+      className={`
+        w-full py-20 transition-all duration-1000
+        ${inView ? "bg-gradient-to-r from-grayish to-dark" : "bg-dark"}
+        text-text2
+      `}
+    >
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-4">
+        {/* Animowane zdjęcie */}
+        <motion.div
+          initial={{ x: -200, opacity: 0 }}
+          animate={inView ? { x: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.8, easing: "ease-out" }}
+          className="w-full md:w-1/2"
+        >
           <img
-            src={MyPhoto} // ← podmień na prawdziwą ścieżkę
-            alt="Vanessa Heckel"
+            src={MyPhoto}
+            alt="Vanessa"
             className="w-40 h-40 md:w-80 md:h-80 object-cover rounded-4xl shadow-lg"
           />
-        </div>
+        </motion.div>
 
-        {/* Prawa kolumna: tekst */}
-        <div className="flex-1 text-text">
-          <h2 className="text-3xl font-bold text-accent mb-4">O mnie</h2>
+        {/* Animowany tekst */}
+        <motion.div
+          initial={{ x: 200, opacity: 0 }}
+          animate={inView ? { x: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2, easing: "ease-out" }}
+          className="w-full md:w-1/2 text-lg leading-relaxed "
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-accent">
+            O mnie
+          </h2>
           <p className="mb-4 leading-relaxed">
             Szukasz skutecznej i wygodnej formy nauki matematyki? Oferuję
             korepetycje z matematyki online dedykowane uczniom liceum i
@@ -30,7 +56,7 @@ export default function AboutMe() {
             zrozumienie trudnych zagadnień i stopniowe budowanie pewności
             siebie.
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

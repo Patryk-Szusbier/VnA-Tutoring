@@ -5,7 +5,7 @@ import Offert from "./Offert";
 
 function Home() {
   return (
-    <main className="flex-grow">
+    <main className="flex-grow ">
       <Hero />
       <AboutMe />
       <Offert />

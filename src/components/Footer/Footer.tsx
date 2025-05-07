@@ -113,8 +113,12 @@ export default function Footer() {
       </div>
 
       {/* Dolna stopka */}
-      <div className="mt-8 border-t border-accent pt-4 text-center text-xs ">
-        © {new Date().getFullYear()} Vanessa Heckel. Wszelkie prawa zastrzeżone.
+      <div className="  pt-4 text-center text-xs ">
+        <div className="animated-separator "></div>
+        <p className="pt-5">
+          © {new Date().getFullYear()} Vanessa Heckel. Wszelkie prawa
+          zastrzeżone.
+        </p>
       </div>
     </footer>
   );
