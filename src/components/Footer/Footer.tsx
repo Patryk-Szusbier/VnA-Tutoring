@@ -1,10 +1,11 @@
 import { Facebook, Instagram, Globe } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
 import Logo from "../../assets/VH_logo2.png";
+import AnimatedSeparator from "../utils/Separator";
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-text py-8 border-t-1 border-accent">
+    <footer className="bg-dark text-text py-8 ">
       <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-4 gap-6  pt-5">
         {/* 1. Logo / nazwa */}
         <div className="cursor-pointer">
@@ -114,7 +115,7 @@ export default function Footer() {
 
       {/* Dolna stopka */}
       <div className="  pt-4 text-center text-xs ">
-        <div className="animated-separator "></div>
+        <AnimatedSeparator />
         <p className="pt-5">
           © {new Date().getFullYear()} Vanessa Heckel. Wszelkie prawa
           zastrzeżone.

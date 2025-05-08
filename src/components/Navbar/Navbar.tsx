@@ -24,7 +24,8 @@ export default function Navbar() {
     shadow-md 
     rounded-xl 
     transition-all duration-300 
-    border-b border-r border-accent
+    
+    border-b-2 border-r border-accent
   "
     >
       <div className="flex items-center justify-between px-6 py-4 relative">

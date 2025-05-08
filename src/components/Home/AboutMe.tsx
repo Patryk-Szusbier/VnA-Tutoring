@@ -14,7 +14,7 @@ export default function AboutMe() {
       ref={ref}
       className={`
         w-full py-20 transition-all duration-1000
-        ${inView ? "bg-gradient-to-r from-grayish to-dark" : "bg-dark"}
+        ${inView ? "bg-gradient-to-tr from-grayish to-dark" : "bg-dark"}
         text-text2
       `}
     >

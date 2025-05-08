@@ -10,7 +10,15 @@ export default function OffertSection() {
   const inView = useInView(ref, { margin: "-20% 0px", amount: 0.3 });
 
   return (
-    <section ref={ref} id="oferta" className="py-20">
+    <section
+      ref={ref}
+      id="oferta"
+      className={`
+        w-full py-20 transition-all duration-1000
+        ${inView ? "bg-gradient-to-r from-grayish to-dark" : "bg-dark"}
+        text-text2
+      `}
+    >
       <div className="max-w-6xl mx-auto px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: -50 }}
@@ -37,7 +45,7 @@ export default function OffertSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{
                 duration: 0.6,
-                delay: 0.3 + idx * 0.1,
+                delay: 0.4 + idx * 0.1,
               }}
             >
               <Card title={c.title} message={c.message} />
