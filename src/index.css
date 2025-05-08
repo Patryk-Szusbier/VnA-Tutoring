@@ -20,7 +20,7 @@ body,
   width: 100%;
   background: linear-gradient(90deg, transparent, #ff9a00, transparent);
   background-size: 200% 100%;
-  animation: moveGradient 12s linear infinite;
+  animation: moveGradient 10s linear infinite;
   margin: 0;
 }
 

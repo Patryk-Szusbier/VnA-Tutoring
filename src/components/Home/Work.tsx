@@ -17,7 +17,12 @@ function Work() {
     >
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
         {/* Tekst po lewej stronie */}
-        <div className="w-1/2 md:w-1/2 text-left">
+        <motion.div
+          initial={{ x: -200, y: -200, opacity: 0 }}
+          animate={inView ? { x: 0, y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2, easing: "ease-out" }}
+          className="w-full md:w-1/2 text-lg leading-relaxed "
+        >
           <h2 className="text-xl md:text-4xl font-bold mb-6 text-accent">
             Jak pracuję
           </h2>
@@ -30,10 +35,16 @@ function Work() {
             tematy krok po kroku. Dzięki indywidualnemu podejściu lekcje są w
             pełni dostosowane do Twojego tempa pracy i stylu nauki.
           </p>
-        </div>
+        </motion.div>
 
         {/* Obrazek po prawej stronie z marginesem */}
-        <div className="w-1/2 md:w-1/3 mt-8 md:mt-0 md:ml-10">
+
+        <motion.div
+          initial={{ x: 200, y: -200, opacity: 0 }}
+          animate={inView ? { x: 0, y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2, easing: "ease-out" }}
+          className="w-1/2  md:w-1/3 mt-8 md:mt-0 md:ml-10 hidden md:block"
+        >
           <motion.img
             src={Photo}
             alt="Jak pracuję"
@@ -42,7 +53,7 @@ function Work() {
             animate={{ opacity: inView ? 1 : 0 }}
             transition={{ duration: 1 }}
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

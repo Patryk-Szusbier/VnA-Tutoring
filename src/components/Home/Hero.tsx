@@ -2,7 +2,7 @@ import Photo from "../../assets/Hero-bg.jpg";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section id="Home" className="relative h-screen w-full overflow-hidden">
       {/* Tło z efektem blur */}
       <div className="absolute inset-0">
         <img

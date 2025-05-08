@@ -8,27 +8,31 @@ export default function Footer() {
     <footer className="bg-dark text-text py-8 ">
       <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-4 gap-6  pt-5">
         {/* 1. Logo / nazwa */}
-        <div className="cursor-pointer">
-          <img
-            src={Logo}
-            alt="Logo Vanessa Heckel"
-            className="w-12 h-12 mb-2"
-          />
-          <p className="text-text2 text-3xl font-semibold">Vanessa Heckel</p>
-          <p className="text-m">Korepetycje</p>
-        </div>
-
+        <a href="#Home">
+          <div className="cursor-pointer">
+            <img
+              src={Logo}
+              alt="Logo Vanessa Heckel"
+              className="w-12 h-12 mb-2"
+            />
+            <p className="text-text2 text-3xl font-semibold">Vanessa Heckel</p>
+            <p className="text-m">Korepetycje</p>
+          </div>
+        </a>
         {/* 2. Nawigacja */}
         <div>
           <h3 className="text-text2 font-semibold mb-2 text-2xl">Nawigacja</h3>
           <ul className="space-y-1">
             <li>
-              <a href="#oferta" className="hover:text-accent transition-colors">
+              <a href="#Offert" className="hover:text-accent transition-colors">
                 Oferta
               </a>
             </li>
             <li>
-              <a href="#omnie" className="hover:text-accent transition-colors">
+              <a
+                href="#AboutMe"
+                className="hover:text-accent transition-colors"
+              >
                 O mnie
               </a>
             </li>
@@ -41,7 +45,11 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="/terms" className="hover:text-accent transition-colors">
+              <a
+                href="/Warunki_uzytkowania_BLIK_imoje.docx.pdf"
+                target="_blank"
+                className="hover:text-accent transition-colors"
+              >
                 Warunki użytkowania
               </a>
             </li>
@@ -117,7 +125,7 @@ export default function Footer() {
       <div className="  pt-4 text-center text-xs ">
         <AnimatedSeparator />
         <p className="pt-5">
-          © {new Date().getFullYear()} Vanessa Heckel. Wszelkie prawa
+          © {new Date().getFullYear()} Patryk Szusbier. Wszelkie prawa
           zastrzeżone.
         </p>
       </div>

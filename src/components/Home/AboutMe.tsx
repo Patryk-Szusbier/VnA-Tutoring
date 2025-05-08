@@ -12,8 +12,9 @@ export default function AboutMe() {
   return (
     <section
       ref={ref}
+      id="AboutMe"
       className={`
-        w-full py-20 transition-all duration-1000
+        w-full py-20 transition-all duration-1000 scroll-mt-36
         ${inView ? "bg-gradient-to-tr from-grayish to-dark" : "bg-dark"}
         text-text2
       `}

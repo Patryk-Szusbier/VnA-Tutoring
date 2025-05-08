@@ -5,6 +5,7 @@ import Offert from "./Offert";
 
 import AnimatedSeparator from "../utils/Separator";
 import Work from "./Work";
+import ContactForm from "./ContactMe";
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
       <AnimatedSeparator />
       <Work />
       <AnimatedSeparator />
+      <ContactForm />
     </main>
   );
 }
