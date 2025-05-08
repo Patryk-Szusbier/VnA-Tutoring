@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
-import Logo from "../../assets/VH_logo2.png";
+import Logo from "../../assets/VH_logo2.webp";
 export default function Navbar() {
   const [hidePhone, setHidePhone] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,60 +47,57 @@ export default function Navbar() {
         </a>
         {/* Telefon na środku */}
         <div
-          className={`absolute left-1/2 md:left-1/2 md:transform md:-translate-x-1/2 transform transition-opacity duration-300 ${
+          className={`absolute left-1/2 md:left-2/3 md:transform md:-translate-x-1/2 transform transition-opacity duration-300 ${
             hidePhone ? "opacity-30" : "opacity-100"
           } flex items-center space-x-2 text-accent cursor-pointer`}
         >
           <Phone size={20} className="md:!h-8 md:!w-8" />
-          <span className="font-medium text-m md:text-5xl ">737 457 125</span>
+          <span className="font-medium text-m sm:text-2xl  md:text-2xl ">
+            737 457 125
+          </span>
         </div>
 
         {/* Desktopowe menu */}
 
-        <ul className="hidden md:flex space-x-6 text-xl font-semibold text-text2">
-          <a href="#AboutMe">
-            <li className="hover:text-accent cursor-pointer transition-colors">
-              O mnie
-            </li>
-          </a>
-          <a href="#Offert">
-            <li className="hover:text-accent cursor-pointer transition-colors">
-              Oferta
-            </li>
-          </a>
+        <ul className="hidden xl:flex space-x-6 text-xl font-semibold text-text2">
+          <li className="hover:text-accent cursor-pointer transition-colors">
+            <a href="#AboutMe"> O mnie</a>
+          </li>
 
-          <a href="#Contact">
-            <li className="hover:text-accent cursor-pointer transition-colors">
-              Kontakt
-            </li>
-          </a>
+          <li className="hover:text-accent cursor-pointer transition-colors">
+            <a href="#Offert">Oferta</a>
+          </li>
+
+          <li className="hover:text-accent cursor-pointer transition-colors">
+            <a href="#Contact"> Kontakt</a>
+          </li>
         </ul>
 
         {/* Hamburger (mobile) */}
         <button
-          className="md:hidden text-text focus:outline-none"
+          className="xl:hidden text-text focus:outline-none"
           onClick={() => setMenuOpen((o) => !o)}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
-      </div>
 
-      {/* Mobile menu dropdown */}
-      {menuOpen && (
-        <div className="md:hidden bg-grayish border-t border-accent">
-          <ul className="flex flex-col space-y-2 py-4 px-6 text-text2 text-lg font-medium">
-            <li className="hover:text-accent cursor-pointer transition-colors">
-              Oferta
-            </li>
-            <li className="hover:text-accent cursor-pointer transition-colors">
-              O mnie
-            </li>
-            <li className="hover:text-accent cursor-pointer transition-colors">
-              Kontakt
-            </li>
-          </ul>
-        </div>
-      )}
+        {/* Mobile menu dropdown */}
+        {menuOpen && (
+          <div className="xl:hidden bg-grayish border-t border-accent">
+            <ul className="flex flex-col space-y-2 py-4 px-6 text-text2 text-lg font-medium">
+              <li className="hover:text-accent cursor-pointer transition-colors">
+                Oferta
+              </li>
+              <li className="hover:text-accent cursor-pointer transition-colors">
+                O mnie
+              </li>
+              <li className="hover:text-accent cursor-pointer transition-colors">
+                Kontakt
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

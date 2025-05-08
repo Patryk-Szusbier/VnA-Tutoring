@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Globe } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
-import Logo from "../../assets/VH_logo2.png";
+import Logo from "../../assets/VH_logo2.webp";
 import AnimatedSeparator from "../utils/Separator";
 
 export default function Footer() {
@@ -89,6 +89,7 @@ export default function Footer() {
               href="https://www.facebook.com/profile.php?id=100013915864426"
               target="_blank"
               rel="noopener noreferrer"
+              title="Odwiedź mój profil na Facebooku"
               className="hover:text-white"
             >
               <Facebook className="h-8 w-8 text-text hover:text-accent" />
@@ -97,6 +98,7 @@ export default function Footer() {
               href="https://www.instagram.com/djvanessa.pl/#"
               target="_blank"
               rel="noopener noreferrer"
+              title="Odwiedź mój profil na Instagramie"
               className="hover:text-white"
             >
               <Instagram className="h-8 w-8 text-text hover:text-accent" />

@@ -1,4 +1,4 @@
-import Photo from "../../assets/Hero-bg.jpg";
+import Photo from "../../assets/Hero-bg.webp";
 
 export default function Hero() {
   return (
@@ -16,7 +16,7 @@ export default function Hero() {
 
       {/* Zawartość na wierzchu */}
       <div className="relative z-10 flex items-center justify-center h-full px-4">
-        <h1 className="text-text2 text-4xl md:text-6xl lg:text-7xl font-bold text-center leading-tight">
+        <h1 className="text-text2 text-4xl md:text-6xl font-bold text-center ">
           Korepetycje z matematyki online – profesjonalna pomoc dla licealistów
           i uczniów techników
         </h1>

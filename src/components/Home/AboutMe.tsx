@@ -1,7 +1,7 @@
 // src/components/AboutMe/AboutMe.jsx
 import React, { useRef } from "react";
 import { motion, useInView } from "motion/react";
-import MyPhoto from "../../assets/108.jpg";
+import MyPhoto from "../../assets/108.webp";
 
 export default function AboutMe() {
   // referencja do sekcji
@@ -30,6 +30,7 @@ export default function AboutMe() {
           <img
             src={MyPhoto}
             alt="Vanessa"
+            loading="lazy"
             className="w-40 h-40 md:w-80 md:h-80 object-cover rounded-4xl shadow-lg"
           />
         </motion.div>

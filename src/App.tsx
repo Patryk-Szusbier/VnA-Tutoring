@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen scroll-smooth">
       <Navbar />
       <Home />
       <Footer />

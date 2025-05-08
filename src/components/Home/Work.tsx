@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "motion/react";
-import Photo from "../../assets/ImageWork.jpg";
+import Photo from "../../assets/ImageWork.webp";
 function Work() {
   // referencja do sekcji
   const ref = useRef(null);
@@ -48,6 +48,7 @@ function Work() {
           <motion.img
             src={Photo}
             alt="Jak pracuję"
+            loading="lazy"
             className="w-40 h-40 md:w-80 md:h-80 object-cover rounded-4xl shadow-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: inView ? 1 : 0 }}

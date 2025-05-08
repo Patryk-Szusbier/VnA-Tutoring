@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { motion, useInView } from "motion/react";
+import { useInView } from "motion/react";
 import { ToastContainer, toast } from "react-toastify"; // Importowanie
 import "react-toastify/dist/ReactToastify.css"; // Importowanie stylów dla toasta
 
