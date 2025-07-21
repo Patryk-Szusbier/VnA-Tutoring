@@ -3,7 +3,11 @@ import { FaTiktok } from "react-icons/fa";
 import Logo from "../../assets/VH_logo2.webp";
 import AnimatedSeparator from "../utils/Separator";
 
-export default function Footer() {
+type FooterProps = {
+  onModalOpen: (type: "terms" | "privacy") => void;
+};
+
+export default function Footer({ onModalOpen }: FooterProps) {
   return (
     <footer className="bg-dark text-text py-8 ">
       <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-4 gap-6  pt-5">
@@ -45,13 +49,20 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a
-                href="/Warunki_uzytkowania_BLIK_imoje.docx.pdf"
-                target="_blank"
-                className="hover:text-accent transition-colors"
+              <button
+                onClick={() => onModalOpen("terms")}
+                className="hover:text-accent transition-colors text-left"
               >
                 Warunki użytkowania
-              </a>
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => onModalOpen("privacy")}
+                className="hover:text-accent transition-colors text-left"
+              >
+                Polityka Prywatności
+              </button>
             </li>
           </ul>
         </div>
@@ -89,6 +100,7 @@ export default function Footer() {
               href="https://www.facebook.com/profile.php?id=100013915864426"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Odwiedź mój profil na Facebooku"
               title="Odwiedź mój profil na Facebooku"
               className="hover:text-white"
             >
@@ -98,6 +110,7 @@ export default function Footer() {
               href="https://www.instagram.com/djvanessa.pl/#"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Odwiedź mój profil na Instagramie"
               title="Odwiedź mój profil na Instagramie"
               className="hover:text-white"
             >
@@ -106,6 +119,8 @@ export default function Footer() {
             <a
               href="https://www.tiktok.com/@djvanessa_djaro"
               target="_blank"
+              aria-label="Odwiedź mój profil na TikToku"
+              title="Sprawdź mojego TikToka"
               rel="noopener noreferrer"
               className="hover:text-white"
             >
@@ -115,6 +130,8 @@ export default function Footer() {
               href="https://djvanessa-djaro.com"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="A po zdanej matematyce..."
+              title="A po zdanej matematyce..."
               className="hover:text-white"
             >
               <Globe className="h-8 w-8 text-text hover:text-accent" />
@@ -124,12 +141,13 @@ export default function Footer() {
       </div>
 
       {/* Dolna stopka */}
-      <div className="  pt-4 text-center text-xs ">
+      <div className="  pt-4 text-center text-s ">
         <AnimatedSeparator />
         <p className="pt-5">
-          © {new Date().getFullYear()} Patryk Szusbier. Wszelkie prawa
+          © {new Date().getFullYear()} Vanessa Heckler. Wszelkie prawa
           zastrzeżone.
         </p>
+        <p className="text-tiny">Projekt i realizacja: Patryk Szusbier</p>
       </div>
     </footer>
   );

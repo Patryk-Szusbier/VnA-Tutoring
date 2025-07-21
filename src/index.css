@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
-/* 1. Definicja własnych kolorów */
 @theme {
   --color-dark: #080808;
   --color-grayish: #434343;
   --color-accent: #ff9a00;
   --color-text: #c3c3c3;
   --color-text2: #ffffff;
+  --text-tiny: 0.5rem;
+  --text-tiny--line-height: 1rem;
 }
 html,
 body,

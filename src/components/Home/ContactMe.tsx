@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { useInView } from "motion/react";
 import { ToastContainer, toast } from "react-toastify"; // Importowanie
@@ -11,7 +11,7 @@ const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
-  const [success, setSuccess] = useState(false);
+  const [, setSuccess] = useState(false);
   const ref = useRef(null);
   const inView = useInView(ref, { margin: "-20% 0px", amount: 0.3 });
 
