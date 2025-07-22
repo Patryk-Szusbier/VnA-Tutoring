@@ -1,14 +1,35 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion"; // poprawiona ścieżka importu
+import { useRef, useEffect, useState, lazy } from "react"; // poprawiona ścieżka importu
 import Card from "../Card/Card";
 import cardsData from "../../assets/CardData.json";
-
+// Lazy load framer-motion
+const LazyMotionDiv = lazy(() =>
+  import("framer-motion").then((mod) => ({ default: mod.motion.div }))
+);
+const LazyMotionH2 = lazy(() =>
+  import("framer-motion").then((mod) => ({ default: mod.motion.h2 }))
+);
+const LazyMotionH3 = lazy(() =>
+  import("framer-motion").then((mod) => ({ default: mod.motion.h3 }))
+);
 export default function OffertSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, {
-    margin: "50px",
-    amount: 0.3, // nawet 0.0 na próbę
-  });
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      {
+        rootMargin: "50px",
+        threshold: 0.3,
+      }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, []);
 
   return (
     <section
@@ -19,27 +40,27 @@ export default function OffertSection() {
       } scroll-mt-16 md:scroll-mt-36`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-        <motion.h2
+        <LazyMotionH2
           initial={{ opacity: 0, y: -50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-accent"
         >
           Oferta korepetycji
-        </motion.h2>
+        </LazyMotionH2>
 
-        <motion.h3
+        <LazyMotionH3
           initial={{ opacity: 0, y: -30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-sm sm:text-base md:text-xl text-text2 mb-10"
         >
           Wybierz usługę idealnie dopasowaną do Twoich potrzeb
-        </motion.h3>
+        </LazyMotionH3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {cardsData.map((c, idx) => (
-            <motion.div
+            <LazyMotionDiv
               key={idx}
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -50,7 +71,7 @@ export default function OffertSection() {
               className="h-full"
             >
               <Card title={c.title} message={c.message} />
-            </motion.div>
+            </LazyMotionDiv>
           ))}
         </div>
       </div>

@@ -13,8 +13,8 @@ function Home() {
     <main className="flex-grow">
       <Hero />
 
+      <AnimatedSeparator />
       <Suspense fallback={<div>Ładowanie sekcji…</div>}>
-        <AnimatedSeparator />
         <ImageTextSection
           title="O mnie"
           content="Cześć, mam na imię Vanessa i jestem korepetytorką matematyki z kilkuletnim doświadczeniem. 
@@ -30,8 +30,12 @@ function Home() {
           animation="normal"
         />
         <AnimatedSeparator />
+      </Suspense>
+      <Suspense fallback={<div>Ładowanie sekcji…</div>}>
         <Offert />
         <AnimatedSeparator />
+      </Suspense>
+      <Suspense fallback={<div>Ładowanie sekcji…</div>}>
         <ImageTextSection
           title="Jak pracuję?"
           content="Na zajęciach stawiam na dobrą atmosferę i przejrzyste wyjaśnienia – chcę, aby uczniowie czuli się 
@@ -50,6 +54,8 @@ function Home() {
           animation="up"
         />
         <AnimatedSeparator />
+      </Suspense>
+      <Suspense fallback={<div>Ładowanie sekcji…</div>}>
         <ContactForm />
       </Suspense>
     </main>

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import { useInView } from "motion/react";
 import { ToastContainer, toast } from "react-toastify"; // Importowanie
 import "react-toastify/dist/ReactToastify.css"; // Importowanie stylów dla toasta
 
@@ -12,8 +11,24 @@ const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const [, setSuccess] = useState(false);
-  const ref = useRef(null);
-  const inView = useInView(ref, { margin: "-20% 0px", amount: 0.3 });
+  const ref = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      {
+        rootMargin: "-20% 0px",
+        threshold: 0.3,
+      }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, []);
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
