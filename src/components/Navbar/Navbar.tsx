@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import Logo from "../../assets/VH_logo2.webp";
 
 const Navbar: React.FC = () => {
-  const [hidePhone, setHidePhone] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setHidePhone(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <nav className="fixed left-1/2 top-4 z-50 w-4/5 -translate-x-1/2 bg-grayish shadow-md rounded-xl transition-all duration-300 border-b-2 border-r border-accent">
@@ -41,12 +31,10 @@ const Navbar: React.FC = () => {
 
           {/* Telefon */}
           <div
-            className={`absolute left-1/2 md:left-2/3 md:transform md:-translate-x-1/2 transform transition-opacity duration-300 ${
-              hidePhone ? "opacity-30" : "opacity-100"
-            } flex items-center space-x-2 text-accent cursor-pointer`}
+            className={`absolute left-1/2 md:left-2/3 md:-translate-x-1/2 transform transition-all duration-300 hover:scale-105 flex items-center space-x-2 text-accent cursor-pointer`}
           >
-            <Phone size={20} className="h-4 w-4 md:h-8 md:w-8 " />
-            <span className="font-medium text-sm md:text-lg lg:text-2xl">
+            <Phone size={20} className="h-4 w-4 md:h-8 md:w-8" />
+            <span className="font-medium text-sm md:text-xl lg:text-2xl">
               737 457 125
             </span>
           </div>

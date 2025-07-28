@@ -1,6 +1,7 @@
-import { useRef, useEffect, useState, lazy } from "react"; // poprawiona ścieżka importu
+import { useRef, useEffect, useState, lazy } from "react";
 import Card from "../Card/Card";
 import cardsData from "../../assets/CardData.json";
+
 // Lazy load framer-motion
 const LazyMotionDiv = lazy(() =>
   import("framer-motion").then((mod) => ({ default: mod.motion.div }))
@@ -11,6 +12,7 @@ const LazyMotionH2 = lazy(() =>
 const LazyMotionH3 = lazy(() =>
   import("framer-motion").then((mod) => ({ default: mod.motion.h3 }))
 );
+
 export default function OffertSection() {
   const ref = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -24,10 +26,11 @@ export default function OffertSection() {
       }
     );
 
-    if (ref.current) observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) observer.observe(currentRef);
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
@@ -58,7 +61,7 @@ export default function OffertSection() {
           Wybierz usługę idealnie dopasowaną do Twoich potrzeb
         </LazyMotionH3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-10">
           {cardsData.map((c, idx) => (
             <LazyMotionDiv
               key={idx}
@@ -73,6 +76,17 @@ export default function OffertSection() {
               <Card title={c.title} message={c.message} />
             </LazyMotionDiv>
           ))}
+        </div>
+      </div>
+      <div
+        className={`flex justify-center items-center mt-6 transition-opacity duration-700 `}
+      >
+        <div className="relative rotating-border-wrapper rounded-2xl p-2 mx-2 sm:mx-4 pulse-smooth">
+          <p></p>
+          <p className="relative z-10 text-2xl md:text-3xl font-extrabold text-white rounded-xl shadow-lg px-6 py-4 text-center">
+            <span className="text-accent">PROMOCJA</span> <br />
+            Cena: <span className="text-accent">90zł</span> / 60 minut
+          </p>
         </div>
       </div>
     </section>

@@ -39,10 +39,15 @@ body,
   content: "";
   position: absolute;
   inset: 0;
-  border: 2px solid orange;
+  padding: 2px; /* zamiast border */
   border-radius: 1rem;
+  background: linear-gradient(270deg, #ff9a00, #ff6a00, #ff9a00);
+  background-size: 600% 600%;
   animation: borderShift 6s linear infinite;
-  opacity: 0.6;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 1;
   z-index: 0;
 }
 
@@ -55,5 +60,32 @@ body,
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+@keyframes pulse-smooth {
+  0%,
+  100% {
+    transform: scale(1) rotate(6deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(6deg);
+  }
+}
+
+.pulse-smooth {
+  animation: pulse-smooth 1.5s ease-in-out infinite;
+}
+.fade-delayed {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+  animation-delay: 3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

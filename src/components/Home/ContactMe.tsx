@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify"; // Importowanie
@@ -18,15 +17,16 @@ export default function ContactForm() {
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       {
-        rootMargin: "-20% 0px",
+        rootMargin: "50px",
         threshold: 0.3,
       }
     );
 
-    if (ref.current) observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) observer.observe(currentRef);
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
