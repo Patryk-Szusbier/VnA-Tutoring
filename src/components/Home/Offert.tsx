@@ -42,12 +42,12 @@ export default function OffertSection() {
         inView ? "bg-gradient-to-r from-grayish to-dark" : "bg-dark"
       } scroll-mt-16 md:scroll-mt-36`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <LazyMotionH2
           initial={{ opacity: 0, y: -50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-accent"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 text-accent"
         >
           Oferta korepetycji
         </LazyMotionH2>
@@ -56,12 +56,12 @@ export default function OffertSection() {
           initial={{ opacity: 0, y: -30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-sm sm:text-base md:text-xl text-text2 mb-10"
+          className="text-sm sm:text-base md:text-xl lg:text-2xl text-text2 mb-10 lg:mb-16"
         >
           Wybierz usługę idealnie dopasowaną do Twoich potrzeb
         </LazyMotionH3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 items-stretch">
           {cardsData.map((c, idx) => (
             <LazyMotionDiv
               key={idx}

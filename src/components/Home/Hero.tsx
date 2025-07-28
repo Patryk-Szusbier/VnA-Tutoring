@@ -1,13 +1,13 @@
-import Photo from "../../assets/HeroSection.webp";
-
 export default function Hero() {
   return (
     <section id="Home" className="relative h-screen w-full overflow-hidden">
-      <div className="absolute inset-0 bg-black/50">
+      <div className="absolute inset-0">
         <img
-          src={Photo}
+          src="/HeroSection.webp"
           alt="Hero background"
           className="object-cover h-full w-full blur-sm "
+          loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-black/40" />
       </div>

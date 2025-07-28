@@ -25,18 +25,19 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
       {
         rootMargin: "-20% 0px",
         threshold: 0.3,
       }
     );
 
-    const currentRef = ref.current;
-    if (currentRef) observer.observe(currentRef);
+    if (ref.current) observer.observe(ref.current);
 
     return () => {
-      if (currentRef) observer.unobserve(currentRef);
+      if (ref.current) observer.unobserve(ref.current);
     };
   }, []);
 
@@ -51,7 +52,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
         inView ? "bg-gradient-to-r from-grayish to-dark" : "bg-dark"
       } text-text2`}
     >
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-10">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-10 xl:gap-20 max-w-7xl">
         {/* Obrazek po lewej */}
         {isImageLeft && (
           <motion.div
@@ -64,7 +65,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
               src={image}
               alt={imageAlt}
               loading="lazy"
-              className="w-32 h-32 sm:w-40 sm:h-40 md:w-80 md:h-80 object-cover rounded-3xl shadow-lg mx-auto md:mx-0"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-80 md:h-80 lg:w-[32rem] lg:h-[32rem] object-cover rounded-3xl shadow-lg border-b-5 border-r-3 border-accent mx-auto md:mx-0"
             />
           </motion.div>
         )}
@@ -80,10 +81,12 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
           transition={{ duration: 1.3, delay: 0.2 }}
           className="w-full md:w-1/2 text-center md:text-left"
         >
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 sm:mb-6 text-accent">
+          <h2 className="text-2xl md:text-4xl xl:text-6xl font-bold mb-4 sm:mb-6 text-accent">
             {title}
           </h2>
-          <p className="text-sm  md:text-xl leading-relaxed">{content}</p>
+          <p className="text-sm md:text-xl xl:text-2xl leading-relaxed">
+            {content}
+          </p>
         </motion.div>
 
         {/* Obrazek po prawej */}
@@ -98,7 +101,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
               src={image}
               alt={imageAlt}
               loading="lazy"
-              className="w-32 h-32 sm:w-40 sm:h-40 md:w-80 md:h-80 object-cover rounded-3xl shadow-lg mx-auto md:mx-0"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-80 md:h-80 xl:w-[32rem] xl:h-[32rem] object-cover rounded-3xl shadow-lg mx-auto md:mx-0 border-b-5 border-l-3 border-accent"
             />
           </motion.div>
         )}
