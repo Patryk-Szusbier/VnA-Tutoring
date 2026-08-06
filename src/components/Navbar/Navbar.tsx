@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
                 className="lg:w-16 lg:h-16 md:w-8 md:h-8 w-10 h-10"
               />
               <div className="text-sm leading-4">
-                <p className="text-text2 text-sm md:text-base lg:text-3xl font-semibold">
+                <p className="text-text2 text-sm md:text-base lg:text-3xl font-bold ">
                   Vanessa Heckel
                 </p>
                 <p className="text-text text-xs md:text-base lg:text-lg">

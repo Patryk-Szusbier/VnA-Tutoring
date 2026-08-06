@@ -2,7 +2,10 @@ import Photo from "../../assets/HeroSection.webp";
 
 export default function Hero() {
   return (
-    <section id="Home" className="relative h-screen w-full overflow-hidden">
+    <section
+      id="Home"
+      className="relative h-screen w-full overflow-hidden font-orbix"
+    >
       <div className="absolute inset-0 bg-black/50">
         <img
           src={Photo}

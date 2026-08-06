@@ -29,7 +29,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
       {
         rootMargin: "-20% 0px",
         threshold: 0.3,
-      }
+      },
     );
 
     const currentRef = ref.current;
@@ -47,7 +47,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
     <section
       ref={ref}
       id={id}
-      className={`w-full py-20 transition-all duration-1000 scroll-mt-36 ${
+      className={`w-full min-h-screen flex items-center scroll-mt-auto transition-all duration-1000 ${
         inView ? "bg-gradient-to-r from-grayish to-dark" : "bg-dark"
       } text-text2`}
     >
@@ -64,7 +64,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
               src={image}
               alt={imageAlt}
               loading="lazy"
-              className="w-32 h-32 sm:w-40 sm:h-40 md:w-80 md:h-80 object-cover rounded-3xl shadow-lg mx-auto md:mx-0"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-100 md:h-100 object-cover rounded-3xl shadow-lg mx-auto md:mx-0"
             />
           </motion.div>
         )}
@@ -98,7 +98,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
               src={image}
               alt={imageAlt}
               loading="lazy"
-              className="w-32 h-32 sm:w-40 sm:h-40 md:w-80 md:h-80 object-cover rounded-3xl shadow-lg mx-auto md:mx-0"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-100 md:h-100 object-cover rounded-3xl shadow-lg mx-auto md:mx-0"
             />
           </motion.div>
         )}

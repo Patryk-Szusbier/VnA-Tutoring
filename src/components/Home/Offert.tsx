@@ -4,13 +4,13 @@ import cardsData from "../../assets/CardData.json";
 
 // Lazy load framer-motion
 const LazyMotionDiv = lazy(() =>
-  import("framer-motion").then((mod) => ({ default: mod.motion.div }))
+  import("framer-motion").then((mod) => ({ default: mod.motion.div })),
 );
 const LazyMotionH2 = lazy(() =>
-  import("framer-motion").then((mod) => ({ default: mod.motion.h2 }))
+  import("framer-motion").then((mod) => ({ default: mod.motion.h2 })),
 );
 const LazyMotionH3 = lazy(() =>
-  import("framer-motion").then((mod) => ({ default: mod.motion.h3 }))
+  import("framer-motion").then((mod) => ({ default: mod.motion.h3 })),
 );
 
 export default function OffertSection() {
@@ -23,7 +23,7 @@ export default function OffertSection() {
       {
         rootMargin: "50px",
         threshold: 0.3,
-      }
+      },
     );
 
     const currentRef = ref.current;
@@ -40,7 +40,7 @@ export default function OffertSection() {
       id="Offert"
       className={`w-full py-20 transition-all duration-1000 ${
         inView ? "bg-gradient-to-r from-grayish to-dark" : "bg-dark"
-      } scroll-mt-16 md:scroll-mt-36`}
+      } scroll-mt-auto`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
         <LazyMotionH2

@@ -21,7 +21,7 @@ function Home() {
         Zajęcia prowadzę wyłącznie online, dzięki czemu mogę pomagać uczniom z różnych miast. Uwielbiam zamieniać trudne zagadnienia na proste kroki: 
          tłumaczę matematykę cierpliwie i z uśmiechem. Pomagam uczniom szkół średnich (liceum i technikum) w opanowaniu 
          bieżącego materiału oraz w przygotowaniu do matury na poziomie podstawowym. 
-         Wierzę, że każdy może zrozumieć matematykę – kluczem jest indywidualne podejście i wspólna nauka krok po kroku, 
+         Wierzę, że każdy może zrozumieć matematykę - kluczem jest indywidualne podejście i wspólna nauka krok po kroku, 
          bez stresu."
           image={MyPhoto}
           imageAlt="Vanessa Heckel"
