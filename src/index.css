@@ -1,38 +1,5 @@
 @import "tailwindcss";
-
-@font-face {
-  font-family: Orbix;
-  src: url("/fonts/Mavoble.ttf") format("ttf");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter_Regular.ttf") format("ttf");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter_Bold.ttf") format("ttf");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Playfair";
-  src: url("/fonts/PlayfairDisplay-Regular.ttf") format("ttf");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Playfair";
-  src: url("/fonts/PlayfairDisplay-Italic.ttf") format("ttf");
-  font-weight: 700;
-  font-style: normal;
-}
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-dark: #080808;
@@ -40,96 +7,80 @@
   --color-accent: #ff9a00;
   --color-text: #c3c3c3;
   --color-text2: #ffffff;
-  --text-tiny: 0.5rem;
-  --text-tiny--line-height: 1rem;
-  --font-inter: Inter, "sans-serif";
-  --font-playfair: Playfair, "sans-serif";
-}
-html {
-  scroll-behavior: smooth;
-}
-html,
-body,
-#root {
-  @apply m-0 p-0 w-full h-full bg-[#080808];
-  overflow-x: hidden;
-  font-family: var(--font-inter);
-}
-h1,
-h2 {
-  font-family: var(--font-playfair);
-}
-.animated-separator {
-  max-height: 5px;
-  height: 3px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, #ff9a00, transparent);
-  background-size: 200% 100%;
-  animation: moveGradient 10s linear infinite;
-  margin: 0;
+
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Wysokość paska nawigacji; korzysta z niej też Hero i scroll-padding. */
+  --spacing-nav: 5.5rem;
+
+  --text-hero: clamp(2.5rem, 1.4rem + 5.2vw, 4.5rem);
+  --text-hero--line-height: 1.02;
+  --text-title: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  --text-title--line-height: 1.1;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  --text-lead--line-height: 1.5;
 }
 
-@keyframes moveGradient {
-  0% {
-    background-position: 200% 0;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--spacing-nav) + 1rem);
+    -webkit-text-size-adjust: 100%;
   }
-  100% {
-    background-position: -200% 0;
-  }
-}
-.rotating-border-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 2px; /* zamiast border */
-  border-radius: 1rem;
-  background: linear-gradient(270deg, #ff9a00, #ff6a00, #ff9a00);
-  background-size: 600% 600%;
-  animation: borderShift 6s linear infinite;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  opacity: 1;
-  z-index: 0;
-}
 
-@keyframes borderShift {
-  0% {
-    background-position: 0% 50%;
+  body {
+    margin: 0;
+    background: var(--color-dark);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    overflow-x: clip;
   }
-  50% {
-    background-position: 100% 50%;
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-text2);
+    text-wrap: balance;
   }
-  100% {
-    background-position: 0% 50%;
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
-}
-@keyframes pulse-smooth {
-  0%,
-  100% {
-    transform: scale(1) rotate(6deg);
-  }
-  50% {
-    transform: scale(1.1) rotate(6deg);
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-dark);
   }
 }
 
-.pulse-smooth {
-  animation: pulse-smooth 1.5s ease-in-out infinite;
-}
-.fade-delayed {
-  opacity: 0;
-  animation: fadeIn 2s ease forwards;
-  animation-delay: 3s;
-}
-
-@keyframes fadeIn {
+/* Jedyna animacja wejścia na stronie: hero odsłania się po kolei. */
+@keyframes rise {
   from {
     opacity: 0;
+    transform: translateY(0.75rem);
   }
-  to {
-    opacity: 1;
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 140ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

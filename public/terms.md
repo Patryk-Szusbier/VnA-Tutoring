@@ -1,4 +1,4 @@
-# Warunki użytkowania płatności BLIK przez link oraz formularza kontaktowego
+# Regulamin zajęć, płatności BLIK przez link oraz formularza kontaktowego
 
 ## 1. Informacje ogólne
 
@@ -36,9 +36,17 @@ W przypadku problemów technicznych z płatnością klient może kontaktować si
 
 Formularz kontaktowy udostępniony na naszej stronie służy wyłącznie do komunikacji w sprawach związanych z oferowanymi usługami lub produktami.  
 Zabronione jest wysyłanie treści o charakterze reklamowym, niezgodnym z prawem lub obraźliwym.  
-Korzystając z formularza, użytkownik akceptuje niniejsze Warunki użytkowania oraz wyraża zgodę na przetwarzanie swoich danych osobowych w celu udzielenia odpowiedzi.
+Korzystając z formularza, użytkownik akceptuje niniejszy Regulamin oraz wyraża zgodę na przetwarzanie swoich danych osobowych w celu udzielenia odpowiedzi.
 
-## 7. Postanowienia końcowe
+## 7. Zasady zajęć
 
-Korzystając z płatności BLIK przez link lub wysyłając wiadomość przez formularz kontaktowy, klient akceptuje niniejsze Warunki użytkowania.  
-Zastrzegamy sobie prawo do ich aktualizacji. Aktualna wersja dokumentu zawsze dostępna jest na naszej stronie internetowej.
+Zajęcia są indywidualne, trwają 60 minut i odbywają się online na platformie Microsoft Teams.  
+Przed rozpoczęciem zajęć odbywa się bezpłatna konsultacja telefoniczna. Każda lekcja jest płatna zgodnie z cennikiem podanym na stronie.
+
+Termin zajęć ustalany jest na stałe. Termin można zamienić, zgłaszając to co najmniej **48 godzin** przed zajęciami.  
+Lekcję należy odwołać najpóźniej **24 godziny** przed jej rozpoczęciem. Przy późniejszym odwołaniu uczeń jest zobowiązany do zapłaty za daną godzinę, chyba że odwołanie wynika z nagłego wypadku.
+
+## 8. Postanowienia końcowe
+
+Korzystając z zajęć, z płatności BLIK przez link lub wysyłając wiadomość przez formularz kontaktowy, klient akceptuje niniejszy Regulamin.  
+Zastrzegamy sobie prawo do jego aktualizacji. Aktualna wersja dokumentu zawsze dostępna jest na naszej stronie internetowej.

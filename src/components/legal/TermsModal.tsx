@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 type TermsModalProps = {
@@ -29,6 +29,19 @@ export default function TermsModal({ onClose, type }: TermsModalProps) {
     };
   }, [type]);
 
+  // Fokus trafia do okna, a po zamknięciu wraca tam, skąd je otwarto.
+  const closeButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null;
+    closeButton.current?.focus();
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = overflow;
+      opener?.focus?.();
+    };
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
@@ -39,19 +52,21 @@ export default function TermsModal({ onClose, type }: TermsModalProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={type === "terms" ? "Warunki użytkowania" : "Polityka prywatności"}
-      className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
+      aria-label={type === "terms" ? "Regulamin" : "Polityka prywatności"}
+      className="fixed inset-0 z-50 bg-dark/80 flex items-center justify-center px-4"
     >
-      <div className="relative w-full max-w-3xl max-h-[80vh] overflow-y-auto rounded-xl shadow-2xl p-6 bg-dark text-text">
+      <div className="relative w-full max-w-3xl max-h-[80vh] overflow-y-auto rounded-3xl border border-grayish p-6 bg-dark text-text">
         <button
+          ref={closeButton}
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-text2 text-3xl font-bold hover:scale-110 transition-transform p-2"
+          className="absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border border-grayish text-text2 text-2xl hover:border-text2 transition-colors"
           aria-label="Zamknij"
         >
           ×
         </button>
 
-        <div className="prose prose-invert max-w-none pt-12 text-text [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:text-accent [&_h1]:text-center [&_h1]:text-3xl [&_h2]:text-2xl [&_h2]:py-4 [&_h3]:text-xl [&_h3]:py-4">
+        <div className="prose prose-invert max-w-none pt-12 text-text [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:text-text2 [&_h1]:text-3xl [&_h2]:text-2xl [&_h2]:py-4 [&_h3]:text-xl [&_h3]:py-4">
           <ReactMarkdown>{content}</ReactMarkdown>
         </div>
       </div>
