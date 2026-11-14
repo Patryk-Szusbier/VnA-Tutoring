@@ -27,16 +27,21 @@ export const navLinks = [
 ];
 
 export const hero = {
-  titleLines: ["Matematyka online –", "i\u00a0wszystko jasne!"],
-  lead: t("Indywidualne korepetycje i przygotowanie do matury z\u00a0matematyki"),
+  titleLines: ["Matematyka online -", "i\u00a0wszystko jasne!"],
+  lead: t(
+    "Indywidualne korepetycje i przygotowanie do matury z\u00a0matematyki",
+  ),
   beats: ["Zrozum.", "Przećwicz.", "Poczuj się pewniej."],
-  facts: t("Szkoły średnie, poziom podstawowy. Lekcje 60 minut na Microsoft Teams."),
+  facts: t(
+    "Szkoły średnie, poziom podstawowy. Lekcje 60 minut na Microsoft Teams.",
+  ),
 };
 
 export const offer = {
   title: "W czym pomagam",
-  intro:
-    t("Zajęcia są dla uczniów wszystkich szkół średnich i obejmują matematykę na poziomie podstawowym."),
+  intro: t(
+    "Zajęcia są dla uczniów wszystkich szkół średnich i obejmują matematykę na poziomie podstawowym.",
+  ),
   items: [
     {
       title: "Bieżący materiał",
@@ -48,7 +53,9 @@ export const offer = {
     },
     {
       title: "Poprawy",
-      text: t("Wracamy do tego, co nie poszło, i przygotowujemy Cię do poprawy."),
+      text: t(
+        "Wracamy do tego, co nie poszło, i przygotowujemy Cię do poprawy.",
+      ),
     },
     {
       title: "Nadrabianie zaległości",
@@ -56,7 +63,9 @@ export const offer = {
     },
     {
       title: "Matura podstawowa",
-      text: t("Przygotowanie do egzaminu maturalnego z matematyki na poziomie podstawowym."),
+      text: t(
+        "Przygotowanie do egzaminu maturalnego z matematyki na poziomie podstawowym.",
+      ),
     },
   ],
 };
@@ -66,19 +75,33 @@ export const process = {
   steps: [
     {
       title: "Bezpłatna rozmowa telefoniczna",
-      text: t("Zanim zaczniemy, ustalamy przez telefon, z czym potrzebujesz pomocy."),
+      text: t(
+        "Zanim zaczniemy, ustalamy przez telefon, z czym potrzebujesz pomocy.",
+      ),
     },
     {
       title: "Stały termin",
-      text: t("Termin zajęć ustalamy raz, na stałe. Możesz go zamienić, dając znać co najmniej 48 godzin wcześniej."),
+      text: t(
+        "Termin zajęć ustalamy raz, na stałe. Możesz go zamienić, dając znać co najmniej 48 godzin wcześniej.",
+      ),
     },
     {
       title: "Lekcja na Microsoft Teams",
-      text: t("60 minut, jeden na jeden. Przygotuj coś do pisania i rozwiązywania zadań."),
+      text: t(
+        "60 minut, jeden na jeden. Przygotuj coś do pisania i rozwiązywania zadań.",
+      ),
     },
     {
       title: "Notatki i zadania",
-      text: t("Po lekcji dostajesz przez Teams notatki z zajęć i zadania do zrobienia przed następnym spotkaniem."),
+      text: t(
+        "Po lekcji dostajesz przez Teams notatki z zajęć i zadania do zrobienia przed następnym spotkaniem.",
+      ),
+    },
+    {
+      title: "Notatki i zadania",
+      text: t(
+        "Po lekcji dostajesz przez Teams notatki z zajęć i zadania do zrobienia przed następnym spotkaniem.",
+      ),
     },
   ],
 };
@@ -86,8 +109,12 @@ export const process = {
 export const about = {
   title: "O mnie",
   paragraphs: [
-    t("Nazywam się Vanessa Heckel. Od dwóch lat prowadzę korepetycje z matematyki, a na co dzień studiuję finanse i rachunkowość."),
-    t("Uczę uczniów szkół średnich na poziomie podstawowym: pomagam w bieżącym materiale i przygotowuję do matury. Zajęcia prowadzę wyłącznie indywidualnie i online."),
+    t(
+      "Nazywam się Vanessa Heckel. Od dwóch lat prowadzę korepetycje z matematyki, a na co dzień studiuję finanse i rachunkowość.",
+    ),
+    t(
+      "Uczę uczniów szkół średnich na poziomie podstawowym: pomagam w bieżącym materiale i przygotowuję do matury. Zajęcia prowadzę wyłącznie indywidualnie i online.",
+    ),
   ],
 };
 
@@ -108,11 +135,15 @@ export const pricing = {
     },
     {
       title: "Zmiana terminu",
-      text: t("Termin można zamienić, zgłaszając to co najmniej 48 godzin przed zajęciami."),
+      text: t(
+        "Termin można zamienić, zgłaszając to co najmniej 48 godzin przed zajęciami.",
+      ),
     },
     {
       title: "Odwołanie lekcji",
-      text: t("Lekcję należy odwołać najpóźniej 24 godziny wcześniej. Przy późniejszym odwołaniu jest płatna, chyba że to nagły wypadek."),
+      text: t(
+        "Lekcję należy odwołać najpóźniej 24 godziny wcześniej. Przy późniejszym odwołaniu jest płatna, chyba że to nagły wypadek.",
+      ),
     },
   ],
 };
@@ -122,49 +153,62 @@ export const faq = {
   items: [
     {
       question: "Czego potrzebuję do zajęć?",
-      answer:
-        t("Urządzenia z dostępem do Microsoft Teams oraz czegoś do pisania i rozwiązywania zadań."),
+      answer: t(
+        "Urządzenia z dostępem do Microsoft Teams oraz czegoś do pisania i rozwiązywania zadań.",
+      ),
     },
     {
       question: "Jak długo trwa lekcja?",
-      answer: t("60 minut. Zajęcia są indywidualne i odbywają się online na Microsoft Teams."),
+      answer: t(
+        "60 minut. Zajęcia są indywidualne i odbywają się online na Microsoft Teams.",
+      ),
     },
     {
       question: "Czy dostanę notatki z zajęć?",
-      answer:
-        t("Tak. Po każdej lekcji dostajesz przez Teams notatki oraz zadania do wykonania przed następnymi zajęciami."),
+      answer: t(
+        "Tak. Po każdej lekcji dostajesz przez Teams notatki oraz zadania do wykonania przed następnymi zajęciami.",
+      ),
     },
     {
       question: "Czy mogę zmienić termin?",
-      answer:
-        t("Tak. Termin ustalamy na stałe, ale możesz go zamienić, jeśli dasz znać co najmniej 48 godzin przed zajęciami."),
+      answer: t(
+        "Tak. Termin ustalamy na stałe, ale możesz go zamienić, jeśli dasz znać co najmniej 48 godzin przed zajęciami.",
+      ),
     },
     {
       question: "Co, jeśli muszę odwołać lekcję?",
-      answer:
-        t("Odwołaj ją najpóźniej 24 godziny wcześniej. Przy późniejszym odwołaniu lekcja jest płatna, chyba że to nagły wypadek."),
+      answer: t(
+        "Odwołaj ją najpóźniej 24 godziny wcześniej. Przy późniejszym odwołaniu lekcja jest płatna, chyba że to nagły wypadek.",
+      ),
     },
     {
       question: "Czy pierwsza lekcja jest bezpłatna?",
-      answer:
-        t("Bezpłatna jest konsultacja telefoniczna przed rozpoczęciem zajęć. Każda lekcja kosztuje 110 zł."),
+      answer: t(
+        "Bezpłatna jest konsultacja telefoniczna przed rozpoczęciem zajęć. Każda lekcja kosztuje 110 zł.",
+      ),
     },
     {
       question: "Czy zajęcia obejmują poziom rozszerzony?",
-      answer: t("Nie. Prowadzę zajęcia z matematyki na poziomie podstawowym, w tym przygotowanie do matury podstawowej."),
+      answer: t(
+        "Nie. Prowadzę zajęcia z matematyki na poziomie podstawowym, w tym przygotowanie do matury podstawowej.",
+      ),
     },
   ],
 };
 
 export const contactSection = {
   title: "Kontakt",
-  intro:
-    t("Zadzwoń albo napisz. Zaczynamy od bezpłatnej rozmowy telefonicznej, w której ustalimy termin i zakres zajęć."),
+  intro: t(
+    "Zadzwoń albo napisz. Zaczynamy od bezpłatnej rozmowy telefonicznej, w której ustalimy termin i zakres zajęć.",
+  ),
 };
 
 export const socials = [
   { label: "Instagram", href: "https://www.instagram.com/djvanessa.pl/" },
-  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=100013915864426" },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=100013915864426",
+  },
   { label: "TikTok", href: "https://www.tiktok.com/@djvanessa_djaro" },
   { label: "djvanessa-djaro.com", href: "https://djvanessa-djaro.com" },
 ];
