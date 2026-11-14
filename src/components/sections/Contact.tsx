@@ -11,7 +11,7 @@ const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
-type Status = "idle" | "sending" | "sent" | "failed";
+type Status = "idle" | "sending" | "sent" | "throttled" | "failed";
 
 const fields: { name: Field; label: string; type?: string; autoComplete?: string; maxLength: number }[] = [
   { name: "name", label: "Imię i nazwisko", autoComplete: "name", maxLength: 100 },
@@ -39,6 +39,12 @@ export default function Contact() {
     if (!form.current || status === "sending") return;
 
     const data = new FormData(form.current);
+    // Pułapka na boty: człowiek nie widzi tego pola. Udajemy sukces, żeby bot nie próbował dalej.
+    if (data.get("website")) {
+      form.current.reset();
+      setStatus("sent");
+      return;
+    }
     const values = {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
@@ -54,14 +60,20 @@ export default function Contact() {
     }
 
     setStatus("sending");
-    emailjs.sendForm(serviceID, templateID, form.current, publicKey).then(
+    // shortcut: te blokady działają tylko w przeglądarce; przy realnym spamie włącz reCAPTCHA w EmailJS.
+    const options = {
+      publicKey,
+      blockHeadless: true,
+      limitRate: { id: "contact-form", throttle: 30_000 },
+    };
+    emailjs.sendForm(serviceID, templateID, form.current, options).then(
       () => {
         form.current?.reset();
         setStatus("sent");
       },
       (error) => {
         console.error("Email error:", error?.text ?? error);
-        setStatus("failed");
+        setStatus(error?.status === 429 ? "throttled" : "failed");
       },
     );
   };
@@ -85,6 +97,10 @@ export default function Contact() {
         </ul>
 
         <form ref={form} onSubmit={onSubmit} noValidate aria-label="Formularz kontaktowy">
+          <div aria-hidden="true" className="absolute -left-[9999px]">
+            <label htmlFor="contact-website">Strona WWW</label>
+            <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+          </div>
           <div className="space-y-5">
             {fields.map((field) => {
               const error = errors[field.name];
@@ -128,6 +144,7 @@ export default function Contact() {
 
           <p role="status" className="mt-4 min-h-6 text-text2">
             {status === "sent" && "Wiadomość wysłana."}
+            {status === "throttled" && "Odczekaj pół minuty przed wysłaniem kolejnej wiadomości."}
             {status === "failed" &&
               `Nie udało się wysłać wiadomości. Spróbuj ponownie albo zadzwoń: ${contact.phoneDisplay}.`}
           </p>

@@ -33,6 +33,7 @@ test("wysyła dane formularza, pokazuje potwierdzenie i czyści pola", async () 
     name: "Jan Kowalski",
     email: "jan@example.com",
     message: "Proszę o kontakt",
+    website: "",
   });
 
   expect(await screen.findByText("Wiadomość wysłana.")).toBeTruthy();
@@ -96,4 +97,60 @@ test("blokuje wielokrotną wysyłkę, dopóki poprzednia trwa", async () => {
 
   resolve({ status: 200, text: "OK" });
   await screen.findByRole("button", { name: "Wyślij wiadomość" });
+});
+
+test("wypełniona pułapka na boty nie wysyła wiadomości, ale pokazuje potwierdzenie", async () => {
+  const { container } = render(<Contact />);
+  fill();
+  const trap = container.querySelector<HTMLInputElement>('input[name="website"]')!;
+  expect(trap.closest('[aria-hidden="true"]')).toBeTruthy();
+  expect(trap.tabIndex).toBe(-1);
+  fireEvent.change(trap, { target: { value: "https://spam.example" } });
+  submit();
+
+  expect(sendForm).not.toHaveBeenCalled();
+  expect(await screen.findByText("Wiadomość wysłana.")).toBeTruthy();
+});
+
+test("włącza blokady EmailJS i przy limicie wysyłek prosi o odczekanie", async () => {
+  sendForm.mockRejectedValue({ status: 429, text: "Too Many Requests" });
+  vi.spyOn(console, "error").mockImplementation(() => {});
+  render(<Contact />);
+  fill();
+  submit();
+
+  expect(sendForm.mock.calls[0][3]).toMatchObject({
+    blockHeadless: true,
+    limitRate: { id: "contact-form", throttle: 30_000 },
+  });
+  expect(await screen.findByText(/Odczekaj pół minuty/)).toBeTruthy();
+  expect(field("Wiadomość").value).toBe("Proszę o kontakt");
+});
+
+test.each([
+  ["jednoliterowe imię", { name: "J" }, ["name"]],
+  ["e-mail bez domeny najwyższego poziomu", { email: "jan@example" }, ["email"]],
+  ["e-mail z jednoliterową końcówką", { email: "jan@example.c" }, ["email"]],
+  ["e-mail ze spacją w środku", { email: "jan kowalski@example.com" }, ["email"]],
+  ["e-mail z dwiema małpami", { email: "jan@@example.com" }, ["email"]],
+  ["spacje wokół poprawnego e-maila", { email: "  jan@example.com  " }, []],
+  ["polskie znaki i dwuliterowe imię", { name: "Żó" }, []],
+] as const)("validate: %s", (_case, override, invalid) => {
+  const values = { name: "Jan Kowalski", email: "jan@example.com", message: "Cześć", ...override };
+  expect(Object.keys(validate(values))).toEqual(invalid);
+});
+
+test("po poprawieniu błędu komunikat znika, a kolejna próba wysyła wiadomość", async () => {
+  sendForm.mockResolvedValue({ status: 200, text: "OK" });
+  render(<Contact />);
+  fill("zly-adres");
+  submit();
+  expect(field("Adres e-mail").getAttribute("aria-invalid")).toBe("true");
+
+  fill();
+  submit();
+  expect(field("Adres e-mail").hasAttribute("aria-invalid")).toBe(false);
+  expect(screen.queryByText(/Podaj adres e-mail/)).toBeNull();
+  expect(sendForm).toHaveBeenCalledOnce();
+  expect(await screen.findByText("Wiadomość wysłana.")).toBeTruthy();
 });

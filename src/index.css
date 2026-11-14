@@ -8,7 +8,8 @@
   --color-text: #c3c3c3;
   --color-text2: #ffffff;
 
-  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Wysokość paska nawigacji; korzysta z niej też Hero i scroll-padding. */
@@ -62,7 +63,7 @@
 /* Jedyna animacja wejścia na stronie: hero odsłania się po kolei. */
 @keyframes rise {
   from {
-    opacity: 0;
+    opacity: 0.01;
     transform: translateY(0.75rem);
   }
 }

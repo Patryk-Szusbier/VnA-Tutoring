@@ -68,7 +68,8 @@ export default function Footer({ onModalOpen }: FooterProps) {
 
       <div className="border-t border-grayish">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-6 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p>
+          {/* Rok z buildu może różnić się od bieżącego tuż po Nowym Roku. */}
+          <p suppressHydrationWarning>
             © {new Date().getFullYear()} {brand.name}, {brand.studio}
           </p>
           <div className="flex flex-wrap gap-x-6">
