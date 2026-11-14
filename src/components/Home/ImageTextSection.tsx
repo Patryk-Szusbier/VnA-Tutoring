@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useInView } from "../../hooks/useInView";
 
 type ImageTextSectionProps = {
   title: string;
@@ -20,25 +20,7 @@ const ImageTextSection: React.FC<ImageTextSectionProps> = ({
   id,
   animation = "normal",
 }) => {
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      {
-        rootMargin: "-20% 0px",
-        threshold: 0.3,
-      },
-    );
-
-    const currentRef = ref.current;
-    if (currentRef) observer.observe(currentRef);
-
-    return () => {
-      if (currentRef) observer.unobserve(currentRef);
-    };
-  }, []);
+  const [ref, inView] = useInView<HTMLElement>("-20% 0px");
 
   const isImageLeft = imagePosition === "left";
   const animationstart = animation === "normal";

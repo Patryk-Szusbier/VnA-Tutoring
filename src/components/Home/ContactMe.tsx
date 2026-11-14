@@ -1,7 +1,8 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify"; // Importowanie
 import "react-toastify/dist/ReactToastify.css"; // Importowanie stylów dla toasta
+import { useInView } from "../../hooks/useInView";
 
 const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -9,43 +10,27 @@ const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
-  const [, setSuccess] = useState(false);
-  const ref = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      {
-        rootMargin: "50px",
-        threshold: 0.3,
-      }
-    );
-
-    const currentRef = ref.current;
-    if (currentRef) observer.observe(currentRef);
-
-    return () => {
-      if (currentRef) observer.unobserve(currentRef);
-    };
-  }, []);
+  const [sending, setSending] = useState(false);
+  const [ref, inView] = useInView<HTMLElement>("50px");
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.current) return;
+    if (!form.current || sending) return;
 
-    emailjs.sendForm(serviceID, templateID, form.current, publicKey).then(
-      () => {
-        setSuccess(true);
-        toast.success("Wiadomość została wysłana!");
-        form.current?.reset();
-      },
-      (error) => {
-        toast.error("Wystąpił błąd. Spróbuj ponownie.");
-        console.error("Email error:", error.text);
-        setSuccess(false);
-      }
-    );
+    setSending(true);
+    emailjs
+      .sendForm(serviceID, templateID, form.current, publicKey)
+      .then(
+        () => {
+          toast.success("Wiadomość została wysłana!");
+          form.current?.reset();
+        },
+        (error) => {
+          toast.error("Wystąpił błąd. Spróbuj ponownie.");
+          console.error("Email error:", error?.text ?? error);
+        },
+      )
+      .finally(() => setSending(false));
   };
 
   return (
@@ -67,6 +52,8 @@ export default function ContactForm() {
             type="text"
             name="name"
             placeholder="Imię i nazwisko"
+            aria-label="Imię i nazwisko"
+            maxLength={100}
             required
             className="w-full p-3 rounded bg-grayish border-b-3 border-r-3 border-1
           border-accent placeholder-text"
@@ -75,6 +62,8 @@ export default function ContactForm() {
             type="email"
             name="email"
             placeholder="Twój email"
+            aria-label="Twój email"
+            maxLength={254}
             required
             className="w-full p-3 rounded bg-grayish border-b-3 border-r-3 border-1
           border-accent placeholder-text"
@@ -82,16 +71,19 @@ export default function ContactForm() {
           <textarea
             name="message"
             placeholder="Wiadomość"
+            aria-label="Wiadomość"
             rows={5}
+            maxLength={5000}
             required
             className="w-full p-3 rounded bg-grayish border-b-3 border-r-3 border-1
           border-accent placeholder-text"
           />
           <button
             type="submit"
-            className="bg-accent hover:bg-orange-600 text-dark py-2 px-4 rounded font-semibold transition"
+            disabled={sending}
+            className="bg-accent hover:bg-orange-600 text-dark py-2 px-4 rounded font-semibold transition disabled:opacity-60"
           >
-            Wyślij wiadomość
+            {sending ? "Wysyłanie…" : "Wyślij wiadomość"}
           </button>
         </form>
       </div>

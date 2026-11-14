@@ -42,7 +42,7 @@ export default function Footer({ onModalOpen }: FooterProps) {
             </li>
             <li>
               <a
-                href="#kontakt"
+                href="#Contact"
                 className="hover:text-accent transition-colors"
               >
                 Kontakt
@@ -144,7 +144,7 @@ export default function Footer({ onModalOpen }: FooterProps) {
       <div className="  pt-4 text-center text-s ">
         <AnimatedSeparator />
         <p className="pt-5">
-          © {new Date().getFullYear()} Vanessa Heckler. Wszelkie prawa
+          © {new Date().getFullYear()} Vanessa Heckel. Wszelkie prawa
           zastrzeżone.
         </p>
         <p className="text-tiny">Projekt i realizacja: Patryk Szusbier</p>

@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import Hero from "./Hero";
+import AnimatedSeparator from "../utils/Separator";
 
-const AnimatedSeparator = lazy(() => import("../utils/Separator"));
 const Offert = lazy(() => import("./Offert"));
 const ContactForm = lazy(() => import("./ContactMe"));
 const ImageTextSection = lazy(() => import("./ImageTextSection"));

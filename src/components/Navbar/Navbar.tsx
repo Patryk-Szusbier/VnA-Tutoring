@@ -30,14 +30,15 @@ const Navbar: React.FC = () => {
           </a>
 
           {/* Telefon */}
-          <div
-            className={`absolute left-1/2 md:left-2/3 md:-translate-x-1/2 transform transition-all duration-300 hover:scale-105 flex items-center space-x-2 text-accent cursor-pointer`}
+          <a
+            href="tel:+48737457125"
+            className="absolute left-1/2 md:left-2/3 md:-translate-x-1/2 transform transition-all duration-300 hover:scale-105 flex items-center space-x-2 text-accent"
           >
             <Phone size={20} className="h-4 w-4 md:h-8 md:w-8" />
             <span className="font-medium text-sm md:text-xl lg:text-2xl">
               737 457 125
             </span>
-          </div>
+          </a>
 
           {/* Menu desktop */}
           <ul className="hidden xl:flex space-x-6 text-xl font-semibold text-text2">
@@ -56,7 +57,8 @@ const Navbar: React.FC = () => {
           <button
             className="xl:hidden text-text focus:outline-none relative z-20 flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9"
             onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label="Toggle menu"
+            aria-label="Menu"
+            aria-expanded={menuOpen}
           >
             {menuOpen ? (
               <X size={24} className="size-6 md:size-12" />

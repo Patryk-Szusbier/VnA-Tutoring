@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/50">
         <img
           src={Photo}
-          alt="Hero background"
+          alt=""
           className="object-cover h-full w-full blur-sm "
         />
         <div className="absolute inset-0 bg-black/40" />

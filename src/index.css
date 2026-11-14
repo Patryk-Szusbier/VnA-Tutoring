@@ -45,17 +45,19 @@
   --font-inter: Inter, "sans-serif";
   --font-playfair: Playfair, "sans-serif";
 }
+html {
+  scroll-behavior: smooth;
+}
 html,
 body,
 #root {
   @apply m-0 p-0 w-full h-full bg-[#080808];
   overflow-x: hidden;
-  scroll-behavior: smooth;
   font-family: var(--font-inter);
 }
 h1,
 h2 {
-  font-family: var(--font-playfair); 
+  font-family: var(--font-playfair);
 }
 .animated-separator {
   max-height: 5px;
@@ -84,7 +86,9 @@ h2 {
   background: linear-gradient(270deg, #ff9a00, #ff6a00, #ff9a00);
   background-size: 600% 600%;
   animation: borderShift 6s linear infinite;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
   opacity: 1;

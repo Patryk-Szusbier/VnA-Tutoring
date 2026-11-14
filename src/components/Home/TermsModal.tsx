@@ -2,29 +2,46 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 type TermsModalProps = {
-  isOpen: boolean;
   onClose: () => void;
   type: "terms" | "privacy";
 };
 
-export default function TermsModal({ isOpen, onClose, type }: TermsModalProps) {
+export default function TermsModal({ onClose, type }: TermsModalProps) {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    if (isOpen) {
-      const file = type === "terms" ? "/terms.md" : "/privacy.md";
+    let cancelled = false;
+    fetch(type === "terms" ? "/terms.md" : "/privacy.md")
+      .then((res) => {
+        // Hosting SPA potrafi zwrócić index.html zamiast 404 – nie renderujemy go jako treści
+        if (!res.ok || res.headers.get("content-type")?.includes("text/html"))
+          throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      })
+      .then((text) => !cancelled && setContent(text))
+      .catch((err) => {
+        console.error(err);
+        if (!cancelled)
+          setContent("Nie udało się wczytać dokumentu. Spróbuj ponownie później.");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [type]);
 
-      fetch(file)
-        .then((res) => res.text())
-        .then(setContent)
-        .catch(console.error);
-    }
-  }, [isOpen, type]);
-
-  if (!isOpen) return null;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center px-4">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={type === "terms" ? "Warunki użytkowania" : "Polityka prywatności"}
+      className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
+    >
       <div className="relative w-full max-w-3xl max-h-[80vh] overflow-y-auto rounded-xl shadow-2xl p-6 bg-dark text-text">
         <button
           onClick={onClose}
@@ -34,7 +51,7 @@ export default function TermsModal({ isOpen, onClose, type }: TermsModalProps) {
           ×
         </button>
 
-        <div className="prose prose-invert max-w-none pt-12 text-text text-xm [&_h1]:font_bold [&_h1]:mb-4 [&_h1]:text-accent [&_h1]:text-center [&_h1]:text-3xl [&_h2]:text-2xl [&_h2]:py-4 [&_h3]:text-xl [&_h3]:py-4">
+        <div className="prose prose-invert max-w-none pt-12 text-text [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:text-accent [&_h1]:text-center [&_h1]:text-3xl [&_h2]:text-2xl [&_h2]:py-4 [&_h3]:text-xl [&_h3]:py-4">
           <ReactMarkdown>{content}</ReactMarkdown>
         </div>
       </div>
