@@ -72,6 +72,23 @@
   animation-delay: calc(var(--i, 0) * 140ms);
 }
 
+/* Płynne rozwijanie <details> (FAQ). Przeglądarki bez interpolate-size otwierają od razu. */
+:root {
+  interpolate-size: allow-keywords;
+}
+
+details::details-content {
+  height: 0;
+  overflow: clip;
+  transition:
+    height 0.3s ease,
+    content-visibility 0.3s allow-discrete;
+}
+
+details[open]::details-content {
+  height: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -79,7 +96,8 @@
 
   *,
   *::before,
-  *::after {
+  *::after,
+  details::details-content {
     animation: none !important;
     transition: none !important;
   }
