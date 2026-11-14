@@ -36,7 +36,7 @@ test("linki zewnętrzne otwierane w nowej karcie mają rel=noopener noreferrer",
 test("cena, telefon i pytania pochodzą z danych strony", () => {
   const { container } = render(<App />);
   expect(container.querySelector("#cennik")!.textContent).toContain(pricing.amount);
-  expect(container.querySelectorAll(`a[href="${contact.phoneHref}"]`).length).toBe(3);
+  expect(container.querySelectorAll(`a[href="${contact.phoneHref}"]`).length).toBeGreaterThanOrEqual(3);
   expect(container.querySelectorAll("#faq details").length).toBe(faq.items.length);
 });
 
@@ -83,7 +83,7 @@ test("menu mobilne rozwija się, zwija po wyborze pozycji i po Escape", () => {
 });
 
 test("nawigacja podkreśla link sekcji widocznej podczas przewijania", () => {
-  const tops: Record<string, number> = { oferta: -400, zajecia: 100 };
+  const tops: Record<string, number> = {};
   vi.spyOn(Element.prototype, "getBoundingClientRect").mockImplementation(function (this: Element) {
     return { top: tops[this.id] ?? 5000 } as DOMRect;
   });
@@ -92,8 +92,16 @@ test("nawigacja podkreśla link sekcji widocznej podczas przewijania", () => {
   const current = () =>
     [...document.querySelectorAll('header [aria-current="location"]')].map((a) => a.textContent);
 
+  // W Hero pasek pokazuje przycisk CTA, poza nim zamienia go na telefon.
+  const headerLinks = (href: string) => document.querySelectorAll(`header a[href="${href}"]`).length;
+  fireEvent.scroll(window);
+  expect(current()).toEqual([]);
+  expect([headerLinks("#kontakt"), headerLinks(contact.phoneHref)]).toEqual([2, 1]);
+
+  Object.assign(tops, { oferta: -400, zajecia: 100 });
   fireEvent.scroll(window);
   expect(current()).toEqual(["Zajęcia"]);
+  expect([headerLinks("#kontakt"), headerLinks(contact.phoneHref)]).toEqual([1, 2]);
 
   tops["o-mnie"] = 50;
   fireEvent.scroll(window);

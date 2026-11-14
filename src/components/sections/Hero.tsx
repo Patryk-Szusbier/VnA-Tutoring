@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
-import { Phone } from "lucide-react";
+import { ChevronDown, Phone } from "lucide-react";
 import Portrait from "../../assets/vanessa-heckel.webp";
-import { brand, contact, cta, hero } from "../../data/site";
+import { brand, contact, cta, hero, offer } from "../../data/site";
 import ButtonLink from "../ui/ButtonLink";
 
 const step = (i: number) => ({ "--i": i }) as CSSProperties;
@@ -11,7 +11,7 @@ export default function Hero() {
     <section
       id="start"
       aria-labelledby="start-title"
-      className="flex min-h-[calc(100svh_-_var(--spacing-nav)_-_1px)] items-center"
+      className="relative flex min-h-[calc(100svh_-_var(--spacing-nav)_-_1px)] items-center"
     >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pb-16 pt-12 sm:px-8 md:pb-24 md:pt-20 lg:grid-cols-12">
         <div className="lg:col-span-8">
@@ -39,7 +39,10 @@ export default function Hero() {
             ))}
           </p>
 
-          <div className="rise mt-10 flex flex-col gap-3 sm:flex-row" style={step(5)}>
+          <div
+            className="rise mt-10 flex flex-col gap-3 sm:flex-row"
+            style={step(5)}
+          >
             <ButtonLink href={cta.href}>{cta.label}</ButtonLink>
             <ButtonLink href={contact.phoneHref} variant="secondary">
               <Phone aria-hidden="true" size={18} />
@@ -51,7 +54,10 @@ export default function Hero() {
           </p>
         </div>
 
-        <figure className="rise ml-2 flex items-center gap-5 lg:col-span-4 lg:flex-col lg:ml-0 lg:items-start" style={step(1)}>
+        <figure
+          className="rise ml-2 flex items-center gap-5 lg:col-span-4 lg:flex-col lg:ml-0 lg:items-start"
+          style={step(1)}
+        >
           <img
             src={Portrait}
             alt="Vanessa Heckel"
@@ -68,6 +74,14 @@ export default function Hero() {
           </figcaption>
         </figure>
       </div>
+      {/* Mieści się w dolnym paddingu treści (pb-16), więc jej nie zasłania. */}
+      <a
+        href="#oferta"
+        aria-label={`Przejdź do sekcji: ${offer.title}`}
+        className="absolute bottom-2 md:bottom-12 left-1/2 inline-flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border border-grayish text-text2 transition-colors hover:border-grayish hover:bg-accent hover:text-dark"
+      >
+        <ChevronDown aria-hidden="true" />
+      </a>
     </section>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import Logo from "../../assets/VH_logo2.webp";
-import { brand, cta, navLinks } from "../../data/site";
+import { brand, contact, cta, navLinks } from "../../data/site";
 import ButtonLink from "../ui/ButtonLink";
 
 export default function Navbar() {
@@ -18,7 +18,8 @@ export default function Navbar() {
   const [active, setActive] = useState("");
   useEffect(() => {
     const onScroll = () => {
-      const line = window.innerHeight * 0.3;
+      // Min. 120px: kotwica ląduje ~104px od góry (scroll-padding), także w niskim oknie.
+      const line = Math.max(window.innerHeight * 0.3, 120);
       let current = "";
       for (const { href } of navLinks) {
         const el = document.getElementById(href.slice(1));
@@ -48,9 +49,10 @@ export default function Navbar() {
         aria-label="Główna"
         className="mx-auto flex max-w-6xl items-center h-nav justify-between gap-4 px-5 sm:px-8"
       >
-        <a href="#start" className="flex items-center gap-3 rounded-lg">
+        <a href="#start" className="flex shrink-0 items-center gap-3 rounded-lg">
           <img src={Logo} alt="" width={48} height={48} className="h-12 w-12 rounded-md" />
-          <span className="leading-tight">
+          {/* shortcut: na wąskich telefonach nazwę pokazuje samo logo, tekst zostaje dla czytników ekranu */}
+          <span className="sr-only whitespace-nowrap leading-tight min-[30rem]:not-sr-only">
             <span className="block font-display text-xl font-semibold text-text2">
               {brand.name}
             </span>
@@ -58,7 +60,7 @@ export default function Navbar() {
           </span>
         </a>
 
-        <ul className="hidden items-center gap-8 lg:flex">
+        <ul className="hidden items-center gap-6 whitespace-nowrap lg:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
@@ -72,9 +74,26 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
-          <div className="hidden sm:block">
-            <ButtonLink href={cta.href}>{cta.label}</ButtonLink>
+        <div className="flex items-center gap-2 sm:gap-4">
+          <a
+            href={contact.phoneHref}
+            className="inline-flex min-h-12 items-center gap-2 whitespace-nowrap font-semibold text-text2 transition-colors hover:text-accent md:hidden"
+          >
+            <Phone aria-hidden="true" size={18} />
+            {contact.phoneDisplay}
+          </a>
+          {/* Stała szerokość: zamiana CTA na telefon po opuszczeniu Hero nie przesuwa menu. */}
+          <div className="hidden w-50 whitespace-nowrap md:block">
+            {active ? (
+              <ButtonLink href={contact.phoneHref} className="w-full">
+                <Phone aria-hidden="true" size={18} />
+                {contact.phoneDisplay}
+              </ButtonLink>
+            ) : (
+              <ButtonLink href={cta.href} className="w-full">
+                {cta.label}
+              </ButtonLink>
+            )}
           </div>
           <button
             type="button"
@@ -104,7 +123,7 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
-            <li className="py-3 sm:hidden">
+            <li className="py-3 md:hidden">
               <ButtonLink href={cta.href} onClick={() => setOpen(false)} className="w-full">
                 {cta.label}
               </ButtonLink>
