@@ -18,8 +18,16 @@ const stylesheet = page.match(/<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+
 if (!stylesheet) throw new Error(`prerender: brak arkusza stylów w ${file}`);
 const css = await readFile(`dist${stylesheet[1]}`, "utf8");
 
+// Fonty z polskimi znakami (latin + latin-ext) pobierane od razu: tekst układa się raz,
+// zamiast ponownie po doczytaniu każdego pliku fontu (krótszy Total Blocking Time).
+const fonts = [...new Set(css.match(/\/assets\/[\w-]+-latin(-ext)?-wght-normal-[\w-]+\.woff2/g))];
+if (fonts.length !== 4) throw new Error(`prerender: oczekiwano 4 plików fontów, jest ${fonts.length}`);
+const preloads = fonts
+  .map((href) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${href}">`)
+  .join("");
+
 const result = page
-  .replace(stylesheet[0], () => `<style>${css}</style>`)
+  .replace(stylesheet[0], () => `${preloads}<style>${css}</style>`)
   .replace(marker, () => `<div id="root">${html}</div>`);
 await writeFile(file, result);
 // vite-plugin-compression spakował jeszcze pustą wersję strony.

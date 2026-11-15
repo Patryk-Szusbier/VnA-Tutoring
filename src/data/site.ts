@@ -97,12 +97,6 @@ export const process = {
         "Po lekcji dostajesz przez Teams notatki z zajęć i zadania do zrobienia przed następnym spotkaniem.",
       ),
     },
-    {
-      title: "Notatki i zadania",
-      text: t(
-        "Po lekcji dostajesz przez Teams notatki z zajęć i zadania do zrobienia przed następnym spotkaniem.",
-      ),
-    },
   ],
 };
 

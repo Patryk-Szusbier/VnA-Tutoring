@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { ChevronDown, Phone } from "lucide-react";
-import Portrait from "../../assets/vanessa-heckel.webp";
+import Portrait from "../../assets/korepetytorka-hero.webp";
+import PortraitSmall from "../../assets/korepetytorka-hero-200.webp";
 import { brand, contact, cta, hero, offer } from "../../data/site";
 import ButtonLink from "../ui/ButtonLink";
 
@@ -21,7 +22,10 @@ export default function Hero() {
             style={step(0)}
           >
             {hero.titleLines.map((line, i) => (
-              <span key={line} className="xl:block">
+              <span
+                key={line}
+                className={i > 0 ? "text-accent xl:block" : "xl:block"}
+              >
                 {i > 0 && " "}
                 {line}
               </span>
@@ -58,14 +62,22 @@ export default function Hero() {
           className="rise ml-2 flex items-center gap-5 lg:col-span-4 lg:flex-col lg:ml-0 lg:items-start"
           style={step(1)}
         >
-          <img
-            src={Portrait}
-            alt="Vanessa Heckel"
-            width={480}
-            height={480}
-            fetchPriority="high"
-            className="h-28 w-28 shrink-0 rounded-full bg-accent object-cover ring-4 ring-accent ring-offset-4 ring-offset-dark sm:h-36 sm:w-36 lg:h-60 lg:w-60"
-          />
+          {/* Koło zajmuje dół ramki; postać stoi na jego dolnej krawędzi i wystaje górą. */}
+          <div className="relative aspect-[1/1.36] w-28 shrink-0 sm:w-36 lg:w-60">
+            <div className="absolute inset-x-0 bottom-0 aspect-square rounded-full bg-accent shadow-glow ring-4 ring-accent ring-offset-4 ring-offset-dark" />
+            {/* Zaokrąglony dół przycina postać do koła, góra zostaje nieprzycięta. */}
+            <img
+              src={Portrait}
+              // Telefon dostaje mniejszy plik; szerokości to realny rozmiar postaci w ramce (ok. 80% koła).
+              srcSet={`${PortraitSmall} 200w, ${Portrait} 398w`}
+              sizes="(min-width: 64rem) 15rem, (min-width: 40rem) 7.2rem, 5.6rem"
+              alt="Vanessa Heckel"
+              width={398}
+              height={678}
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full rounded-b-full object-contain object-bottom"
+            />
+          </div>
           <figcaption className="leading-snug">
             <span className="block font-display text-xl font-semibold text-text2">
               {brand.name}
@@ -80,7 +92,7 @@ export default function Hero() {
         aria-label={`Przejdź do sekcji: ${offer.title}`}
         className="absolute bottom-2 md:bottom-12 left-1/2 inline-flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border border-grayish text-text2 transition-colors hover:border-grayish hover:bg-accent hover:text-dark"
       >
-        <ChevronDown aria-hidden="true" />
+        <ChevronDown aria-hidden="true" className="animate-bounce" />
       </a>
     </section>
   );

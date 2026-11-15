@@ -21,12 +21,19 @@
   --text-title--line-height: 1.1;
   --text-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
   --text-lead--line-height: 1.5;
+
+  /* Pomarańczowa poświata: portret w hero i karta cennika. */
+  --shadow-glow: 0 0 6rem 0.5rem
+    color-mix(in srgb, var(--color-accent) 22%, transparent);
 }
 
 @layer base {
   html {
+    /* Cała strona jest w rem, więc skaluje się z oknem: 16px do ~1170px szerokości, 20px od ~1710px. */
+    font-size: clamp(100%, 0.45rem + 0.75vw, 125%);
     scroll-behavior: smooth;
-    scroll-padding-top: calc(var(--spacing-nav) + 1rem);
+    /* +1px: dolna ramka nawigacji. Sekcja ląduje równo pod paskiem. */
+    scroll-padding-top: calc(var(--spacing-nav) + 1px);
     -webkit-text-size-adjust: 100%;
   }
 
@@ -60,7 +67,7 @@
   }
 }
 
-/* Jedyna animacja wejścia na stronie: hero odsłania się po kolei. */
+/* Animacja wejścia: hero odsłania się po kolei, sekcje (.reveal) przy scrollu. */
 @keyframes rise {
   from {
     opacity: 0.01;
@@ -71,6 +78,64 @@
 .rise {
   animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   animation-delay: calc(var(--i, 0) * 140ms);
+}
+
+@keyframes draw {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+/* Odsłanianie sekcji sterowane scrollem. Przeglądarki bez animation-timeline pokazują treść od razu. */
+/* Bez zanikania: tekst sekcji poza ekranem nie może być przezroczysty (kontrast w audycie dostępności). */
+@keyframes slide {
+  from {
+    transform: translateY(1.5rem);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: slide linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+/* Kroki zajęć: podświetlenie numeru, linia w dół, następny numer. --i to indeks kroku. */
+@keyframes lit {
+  20%,
+  80% {
+    background: var(--color-accent);
+    color: var(--color-dark);
+  }
+}
+
+@keyframes lit-stay {
+  20%,
+  to {
+    background: var(--color-accent);
+    color: var(--color-dark);
+  }
+}
+
+/* Bez ruchu (reduced motion) linie są po prostu widoczne. */
+@media (prefers-reduced-motion: no-preference) {
+  .steps:not(.steps-run) .step-line {
+    transform: scaleY(0);
+  }
+
+  .steps-run .step-dot {
+    animation: lit 1s calc(var(--i) * 1s) both;
+  }
+
+  .steps-run li:last-child .step-dot {
+    animation-name: lit-stay;
+  }
+
+  .steps-run .step-line {
+    animation: draw 0.75s calc(var(--i) * 1s + 0.75s) ease-out both;
+  }
 }
 
 /* Płynne rozwijanie <details> (FAQ). Przeglądarki bez interpolate-size otwierają od razu. */

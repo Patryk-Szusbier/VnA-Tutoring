@@ -18,7 +18,7 @@ export default function Navbar() {
   const [active, setActive] = useState("");
   useEffect(() => {
     const onScroll = () => {
-      // Min. 120px: kotwica ląduje ~104px od góry (scroll-padding), także w niskim oknie.
+      // Min. 120px: kotwica ląduje ~89px od góry (scroll-padding), także w niskim oknie.
       const line = Math.max(window.innerHeight * 0.3, 120);
       let current = "";
       for (const { href } of navLinks) {

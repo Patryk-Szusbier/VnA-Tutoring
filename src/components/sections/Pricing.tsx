@@ -7,7 +7,7 @@ export default function Pricing() {
   return (
     <Section id="cennik" title={pricing.title}>
       <div className="grid gap-10 md:grid-cols-2">
-        <div className="rounded-3xl bg-grayish p-7 sm:p-9">
+        <div className="rounded-3xl bg-grayish p-7 shadow-glow sm:p-9">
           <p className="font-display font-bold leading-none text-text2">
             <span className="text-7xl tracking-tight">{pricing.amount}</span>{" "}
             <span className="text-3xl">{pricing.currency}</span>
@@ -30,8 +30,10 @@ export default function Pricing() {
           <h3 className="text-xl font-semibold">{pricing.rulesTitle}</h3>
           <dl className="mt-4 border-b border-grayish">
             {pricing.rules.map((rule) => (
-              <div key={rule.title} className="border-t border-grayish py-4">
-                <dt className="font-semibold text-text2">{rule.title}</dt>
+              <div key={rule.title} className="group border-t border-grayish py-4">
+                <dt className="font-semibold text-text2 transition group-hover:translate-x-1 group-hover:text-accent">
+                  {rule.title}
+                </dt>
                 <dd className="mt-1">{rule.text}</dd>
               </div>
             ))}
